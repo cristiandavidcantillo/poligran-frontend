@@ -9,31 +9,148 @@
 <body class="bg-gray-100">
 
   <!-- Navbar -->
-  <nav class="w-full bg-white shadow-md">
+  <nav class="w-full bg-white shadow-md z-10 relative">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      
-      <!-- Logo -->
-      <div class="text-xl font-bold text-gray-800">
-        DelishOrder
+      <div class="flex items-center space-x-2">
+        <img src="/img/logo.png" alt="Logo" class="h-8 w-8">
+        <span class="text-xl font-bold text-gray-800">DelishOrder</span>
       </div>
-      
-      <!-- Menú central -->
-      <div class="space-x-8 hidden md:flex justify-center flex-1 text-center">
-        <a href="#" class="text-black hover:text-blue-600 font-medium">Inicio</a>
-        <a href="#" class="text-black hover:text-blue-600 font-medium">Dashboard</a>
-        <a href="#" class="text-black hover:text-blue-600 font-medium">Usuarios</a>
-        <a href="#" class="text-black hover:text-blue-600 font-medium">Soporte</a>
+      <div class="space-x-8 hidden md:flex justify-center flex-1 text-center items-center">
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/img/Vector.png" alt="Inicio" class="h-5 w-5">
+          <span>Inicio</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/img/dash.png" alt="Dashboard" class="h-5 w-5">
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/img/usuarios.png" alt="Usuarios" class="h-5 w-5">
+          <span>Usuarios</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/img/soporte.png" alt="Soporte" class="h-5 w-5">
+          <span>Soporte</span>
+        </a>
       </div>
-      
-      <!-- Botón cerrar sesión -->
       <div>
         <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
           Cerrar sesión
         </button>
       </div>
-
     </div>
   </nav>
+
+  <!-- Hero -->
+  <section class="relative h-[50vh] bg-cover bg-center flex items-center justify-center" style="background-image: url('/img/hamburguesa-home.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="relative z-10 text-center px-4 max-w-2xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        Tu menú, pedidos y clientes en un solo lugar
+      </h1>
+      <p class="text-white text-lg md:text-xl mb-6">
+        Registra productos, gestiona pedidos y haz crecer tu negocio gastronómico
+      </p>
+      <a href="#" class="bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition">
+        Empezar ahora
+      </a>
+    </div>
+  </section>
+
+
+    <!-- Servicios -->
+    <section class="py-10 bg-gray-100">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+            Nuestros Servicios
+          </h2>
+          <p class="text-gray-600 font-bold  mx-auto mb-12">
+            Soluciones diseñadas para facilitar la administración de tu plataforma con seguridad, eficiencia y control total.
+          </p>
+    
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+              <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Gestión de Menú</h3>
+              <p class="text-gray-600">Agrega, edita y organiza tus platos fácilmente.</p>
+            </div>
+    
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+              <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Administración de Pedidos</h3>
+              <p class="text-gray-600">Controla órdenes en tiempo real y optimiza la entrega.</p>
+            </div>
+    
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+              <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m5-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v1a2 2 0 01-2 2h-2m-6 0H8a2 2 0 01-2-2v-1" />
+                  </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Registro de Clientes</h3>
+              <p class="text-gray-600">Guarda datos de clientes para fidelización y promociones.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Testimonios -->
+<section class="py-16 ">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-12">
+        Testimonios
+      </h2>
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="bg-gray-200 p-6 rounded-lg shadow-md text-left flex flex-col gap-4 outline">
+          <div class="flex items-center gap-4">
+            <img src="/img/user1.jpg" alt="Usuario 1" class="h-14 w-14 rounded-full object-cover">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800">Natalia Leal</h3>
+            </div>
+          </div>
+          <p class="text-gray-700 mt-2">
+            La plataforma me permite gestionar mis pedidos sin problemas. ¡Ahora todo es más rápido!.”
+          </p>
+        </div>
+  
+        <div class="bg-gray-200 p-6 rounded-lg shadow-md text-left flex flex-col gap-4 outline">
+          <div class="flex items-center gap-4">
+            <img src="/img/usuario-2.jpg" alt="Usuario 2" class="h-14 w-14 rounded-full object-cover">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800">Cristiano Santos</h3>
+            </div>
+          </div>
+          <p class="text-gray-700 mt-2">
+            "Facilitó muchísimo la gestión de clientes y pedidos. ¡Recomendada al 100%!”
+          </p>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+<footer class="bg-[#026CE5] text-white py-6">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold mb-2">DelishOrder</h2>
+      <p class="text-sm">&copy; 2024 DelishOrder. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  
+  
+    
 
 </body>
 </html>
