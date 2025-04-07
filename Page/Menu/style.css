@@ -40,7 +40,7 @@
     top:0;
     left: 100%;
     width: 500px;
-    background-color: #453E3B;
+    background-color: rgb(2 108 229);
     height: 100vh;
     transition: 0.5s;
 }
@@ -51,7 +51,7 @@
    transform: translateX(-200px);
 }
 .card h1{
-    color: #E8BC0E;
+    color: white;
     font-weight: 100;
     margin: 0;
     padding: 0 20px;
@@ -158,39 +158,22 @@ button {
     width: 35%;
     height: 40px;
     border-radius: 40px;
-    background-color: #E8BC0E;
+    background-color: rgb(2 108 229);
     border: none;
     outline: none;
     cursor: pointer;
     font-size: 1em;
     font-weight: 600;
 }
-.boton_log{
-    width: 85%;
-    height: 40px;
-    border-radius: 40px;
-    background-color: #E8BC0E;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 15px;
-    margin-top: 6px;
-}
+
 .header-actions {
     display: flex;
+    justify-content: end;
     align-items: center;
     margin-left: -82px;
 }
 .shopping, .logout-button {
     margin-right: 25px;
-}
-.contenedor_login{
-    display: flex;
-    width: 100%;
-    margin-top: 10%;
-    justify-content: center;
 }
 .form_container{
     border-radius: 15px;

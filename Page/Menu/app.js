@@ -1,24 +1,70 @@
-// Elementos del DOM
-const openShopping = document.querySelector('.shopping');
-const closeShopping = document.querySelector('.closeShopping');
-const listCard = document.querySelector('.listCard');
-const body = document.querySelector('body');
-const total = document.querySelector('.total');
-const quantity = document.querySelector('.quantity');
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
+let openShopping = document.querySelector('.shopping');
+let closeShopping = document.querySelector('.closeShopping');
+let list = document.querySelector('.list');
+let listCard = document.querySelector('.listCard');
+let body = document.querySelector('body');
+let total = document.querySelector('.total');
+let quantity = document.querySelector('.quantity');
 
-// Datos del carrito
-let cartItems = [];
-
-// Eventos del carrito
-openShopping.addEventListener('click', () => {
+openShopping.addEventListener('click', ()=>{
     body.classList.add('active');
-    updateCart(); // Actualizar al abrir
-});
-
-closeShopping.addEventListener('click', () => {
+})
+closeShopping.addEventListener('click', ()=>{
     body.classList.remove('active');
-});
+})
+
+let products = [
+    {
+        id: 1,
+        name: 'Plato 1',
+        image: '1.PNG',
+        price: '$120.000'
+    },
+    {
+        id: 2,
+        name: 'Plato 2',
+        image: '2.PNG',
+        price: '$120.000'
+    },
+    {
+        id: 3,
+        name: 'Plato 3',
+        image: '3.PNG',
+        price: '$220.000'
+    },
+    {
+        id: 4,
+        name: 'Plato 4',
+        image: '4.PNG',
+        price: '$123.000'
+    },
+    {
+        id: 5,
+        name: 'Plato 5',
+        image: '5.PNG',
+        price: '$320.000'
+    },
+    {
+        id: 6,
+        name: 'Plato 7',
+        image: '6.PNG',
+        price: '$120.000'
+    }
+];
+let listCards  = [];
+function initApp(){
+    products.forEach((value, key) =>{
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('item');
+        newDiv.innerHTML = `
+            <img src="/assets/img/${value.image}">
+            <div class="title">${value.name}</div>
+            <div class="price">${value.price.toLocaleString()}</div>
+            <button onclick="addToCard(${key})">Añadir al carrito</button>`;
+        list.appendChild(newDiv);
+    })
+}
+initApp();
 function addToCard(key){
     if(listCards[key] == null){
         listCards[key] = JSON.parse(JSON.stringify(products[key]));
@@ -26,135 +72,45 @@ function addToCard(key){
     }
     reloadCard();
 }
-// Añadir productos al carrito
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const itemElement = this.closest('.item');
-        const itemId = parseInt(itemElement.getAttribute('data-id'));
-        const itemName = itemElement.getAttribute('data-name');
-        const itemPrice = parseInt(itemElement.getAttribute('data-price'));
-        const itemImage = itemElement.getAttribute('data-image');
-        
-        // Buscar si el producto ya está en el carrito
-        const existingItem = cartItems.find(item => item.id === itemId);
-        
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cartItems.push({
-                id: itemId,
-                name: itemName,
-                price: itemPrice,
-                image: itemImage,
-                quantity: 1
-            });
-        }
-        
-        updateCart();
-        
-        // Feedback visual
-        this.textContent = '✓ Añadido';
-        setTimeout(() => {
-            this.textContent = 'Añadir al carrito';
-        }, 1000);
-    });
-});
-
-// Actualizar el carrito
-function updateCart() {
+function reloadCard(){
     listCard.innerHTML = '';
-    let totalPrice = 0;
-    let totalQuantity = 0;
-    
-    cartItems.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        totalPrice += subtotal;
-        totalQuantity += item.quantity;
-        
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <div><img src="${item.image}" alt="${item.name}"></div>
-            <div>${item.name}</div>
-            <div>$${item.price.toLocaleString('es-CO')}</div>
-            <div class="quantity-controls">
-                <button class="decrease" data-id="${item.id}">-</button>
-                <span class="count">${item.quantity}</span>
-                <button class="increase" data-id="${item.id}">+</button>
-            </div>
-            <div>$${subtotal.toLocaleString('es-CO')}</div>`;
-        listCard.appendChild(li);
-    });
-    
-    // Actualizar controles de cantidad
-    document.querySelectorAll('.decrease').forEach(button => {
-        button.addEventListener('click', function() {
-            updateQuantity(parseInt(this.getAttribute('data-id')), -1);
-        });
-    });
-    
-    document.querySelectorAll('.increase').forEach(button => {
-        button.addEventListener('click', function() {
-            updateQuantity(parseInt(this.getAttribute('data-id')), 1);
-        });
-    });
-    
-    // Actualizar totales
-    total.textContent = `$${totalPrice.toLocaleString('es-CO')}`;
-    quantity.textContent = totalQuantity;
-}
-
-// Actualizar cantidad de items
-function updateQuantity(itemId, change) {
-    const itemIndex = cartItems.findIndex(item => item.id === itemId);
-    
-    if (itemIndex !== -1) {
-        cartItems[itemIndex].quantity += change;
-        
-        if (cartItems[itemIndex].quantity <= 0) {
-            cartItems.splice(itemIndex, 1);
+    let count = 0;
+    let totalPrice = '';
+    listCards.forEach((value, key)=>{
+        totalPrice = totalPrice + value.price;
+        count = count + value.quantity;
+        if(value != null){
+            let newDiv = document.createElement('li');
+            newDiv.innerHTML = `
+                <div><img src="/assets/img/${value.image}"/></div>
+                <div>${value.name}</div>
+                <div>${value.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+                    <div class="count">${value.quantity}</div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+                </div>`;
+                listCard.appendChild(newDiv);
         }
-        
-        updateCart();
-    }
+    })
+    total.innerText = totalPrice.toLocaleString();
+    quantity.innerText = count;
 }
-
-// Sistema de login (se mantiene igual)
+function changeQuantity(key, quantity){
+    if(quantity == ''){
+        delete listCards[key];
+    }else{
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}
 document.addEventListener('DOMContentLoaded', function () {
     checkLoginStatus();
 });
 
-function checkLoginStatus() {
-    if (localStorage.getItem('logged-in')) {
-        showLoggedInState();
-    } else {
-        showLoggedOutState();
-    }
-}
-
-function login() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    if (username !== '' && password !== '') {
-        localStorage.setItem('logged-in', true);
-        showLoggedInState();
-    } else {
-        alert('Por favor, ingrese un nombre de usuario y contraseña.');
-    }
-}
-
-function logout() {
-    localStorage.removeItem('logged-in');
-    showLoggedOutState();
-}
-
-function showLoggedInState() {
-    document.getElementById('login-container').style.display = 'none';
-    document.querySelector('.container').style.display = 'block';
-    document.body.classList.add('logged-in');
-}
-
-function showLoggedOutState() {
-    document.getElementById('login-container').style.display = 'flex';
-    document.querySelector('.container').style.display = 'none';
-    document.body.classList.remove('logged-in');
+function goHome() {
+    window.location.href = '../Home/index.html';
+    // listCards = [];
+    reloadCard();
 }
