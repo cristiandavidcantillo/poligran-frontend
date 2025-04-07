@@ -1,12 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="es">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>admin panel</h1>
-    
+    <title>DelishOrder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-white shadow-md z-10 relative">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <img src="/assets/img/logo.png" alt="Logo" class="h-8 w-8">
+        <span class="text-xl font-bold text-gray-800">DelishOrder</span>
+      </div>
+      <div class="space-x-8 hidden md:flex justify-center flex-1 text-center items-center">
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/Vector.png" alt="Inicio" class="h-5 w-5">
+          <span>Inicio</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/dash.png" alt="Dashboard" class="h-5 w-5">
+          <span>Dashboard</span>
+        </a>
+        <!-- <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/usuarios.png" alt="Usuarios" class="h-5 w-5">
+          <span>Usuarios</span>
+        </a> -->
+        <a href="./contact.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/soporte.png" alt="Soporte" class="h-5 w-5">
+          <span>Soporte</span>
+        </a>
+      </div>
+      <div>
+        <a href="../Login/login.html">
+
+          <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+            Cerrar sesión
+          </button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+    <!-- Contenido del Dashboard -->
+<div class="max-w-7xl mx-auto mt-10 px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-auto">
+  
+      <!-- Sección de Información Básica -->
+      <div class="bg-gray-300 rounded-lg shadow p-4 flex flex-col justify-center font-bold">
+        <ul class="space-y-2 text-sm text-gray-700">
+          <li class="flex justify-between">
+            <span>Usuarios registrados:</span>
+            <span class="font-bold">86</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Últimos accesos:</span>
+            <span class="font-bold">39</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Registros recientes:</span>
+            <span class="font-bold">15</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Caídas del servidor:</span>
+            <span class="font-bold">1</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Solicitudes de usuarios:</span>
+            <span class="font-bold">4</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Pedidos activos:</span>
+            <span class="font-bold">32</span>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Sección de Accesos Rápidos -->
+      <div class="bg-gray-300 rounded-lg shadow p-4 flex flex-col">
+        <h3 class="text-lg font-semibold text-center text-gray-800 mb-3">Accesos Rápidos</h3>
+        <div class="grid grid-cols-2 gap-3 flex-grow">
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Usuarios</button>
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Pedidos</button>
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Inventario</button>
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Reportes</button>
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Categorías</button>
+          <button class="bg-[#1F1D1D] text-white font-medium py-2 px-2 rounded hover:bg-gray-800 text-sm">Soporte</button>
+        </div>
+      </div>
+  
+      <!-- Sección de Pie Chart -->
+      <div class="rounded-lg p-4 h-fit bg-gray-300">
+        <h3 class="text-lg font-semibold text-center text-gray-800 mb-2">Tráfico por dispositivo</h3>
+        <div class="flex items-start justify-between">
+          <div class="w-40 h-40">
+            <canvas id="myPieChart"></canvas>
+          </div>
+          <div id="pieChartLegend" class="ml-4 text-sm"></div>
+        </div>
+      </div>
+  
+    </div>
+
+
+    <!-- Sección de Tabla de Registros de Usuarios -->
+<div class="bg-white p-6 rounded-lg shadow-md mt-10">
+    <div class="overflow-x-auto">
+      <table class="min-w-full table-auto border-collapse">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="px-4 py-2 text-left">Nombre</th>
+            <th class="px-4 py-2 text-left">Correo</th>
+            <th class="px-4 py-2 text-left">Rol</th>
+            <th class="px-4 py-2 text-left">Estado</th>
+            <th class="px-4 py-2 text-left">Última Orden</th>
+            <th class="px-4 py-2 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-800">
+          <tr class="border-b">
+            <td class="px-4 py-2">Cristian Cantillo</td>
+            <td class="px-4 py-2">cristian@mail.com</td>
+            <td class="px-4 py-2">Admin</td>
+            <td class="px-4 py-2">
+              <span class="flex items-center text-green-600">
+                <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>Activo
+              </span>
+            </td>
+            <td class="px-4 py-2">2025-04-01</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <button class="text-blue-500 hover:text-blue-700">
+                <i data-lucide="pencil" class="w-5 h-5"></i>
+              </button>
+              <button class="text-red-500 hover:text-red-700">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="border-b">
+            <td class="px-4 py-2">Laura Gómez</td>
+            <td class="px-4 py-2">laura@mail.com</td>
+            <td class="px-4 py-2">Visualizador</td>
+            <td class="px-4 py-2">
+              <span class="flex items-center text-green-600">
+                <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>Activo
+              </span>
+            </td>
+            <td class="px-4 py-2">2025-03-28</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <button class="text-blue-500 hover:text-blue-700">
+                <i data-lucide="pencil" class="w-5 h-5"></i>
+              </button>
+              <button class="text-red-500 hover:text-red-700">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="border-b">
+            <td class="px-4 py-2">Pedro Silva</td>
+            <td class="px-4 py-2">pedro.silva@mail.com</td>
+            <td class="px-4 py-2">Admin</td>
+            <td class="px-4 py-2">
+              <span class="flex items-center text-green-600">
+                <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>Activo
+              </span>
+            </td>
+            <td class="px-4 py-2">2025-03-30</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <button class="text-blue-500 hover:text-blue-700">
+                <i data-lucide="pencil" class="w-5 h-5"></i>
+              </button>
+              <button class="text-red-500 hover:text-red-700">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="border-b">
+            <td class="px-4 py-2">Marta Ruiz</td>
+            <td class="px-4 py-2">marta.ruiz@mail.com</td>
+            <td class="px-4 py-2">Visualizador</td>
+            <td class="px-4 py-2">
+              <span class="flex items-center text-green-600">
+                <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>Activo
+              </span>
+            </td>
+            <td class="px-4 py-2">2025-04-02</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <button class="text-blue-500 hover:text-blue-700">
+                <i data-lucide="pencil" class="w-5 h-5"></i>
+              </button>
+              <button class="text-red-500 hover:text-red-700">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="border-b">
+            <td class="px-4 py-2">Juan Torres</td>
+            <td class="px-4 py-2">juan.torres@mail.com</td>
+            <td class="px-4 py-2">Admin</td>
+            <td class="px-4 py-2">
+              <span class="flex items-center text-green-600">
+                <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>Activo
+              </span>
+            </td>
+            <td class="px-4 py-2">2025-04-05</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <button class="text-blue-500 hover:text-blue-700">
+                <i data-lucide="pencil" class="w-5 h-5"></i>
+              </button>
+              <button class="text-red-500 hover:text-red-700">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+        
+  </div>
+  
+
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Script externo para el pie chart -->
+  <script src="../../js/admin.js"></script>
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
 </body>
 </html>
