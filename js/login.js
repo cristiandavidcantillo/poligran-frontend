@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado));
   
         if (usuarioEncontrado.rol === "admin") {
-          window.location.href = "../admin/index.html";
+          window.location.href = "../page/admin/index.html";
         } else {
-          window.location.href = "../home/index.html";
+          window.location.href = "../page/home/index.html";
         }
       } else {
         alert("Usuario o contraseña incorrecta");
