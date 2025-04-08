@@ -18,37 +18,37 @@ let products = [
         id: 1,
         name: 'Plato 1',
         image: '1.PNG',
-        price: '$120.000'
+        price: 120000
     },
     {
         id: 2,
         name: 'Plato 2',
         image: '2.PNG',
-        price: '$120.000'
+        price: 120000
     },
     {
         id: 3,
         name: 'Plato 3',
         image: '3.PNG',
-        price: '$220.000'
+        price: 220000
     },
     {
         id: 4,
         name: 'Plato 4',
         image: '4.PNG',
-        price: '$123.000'
+        price: 123000
     },
     {
         id: 5,
         name: 'Plato 5',
         image: '5.PNG',
-        price: '$320.000'
+        price: 320000
     },
     {
         id: 6,
         name: 'Plato 7',
         image: '6.PNG',
-        price: '$120.000'
+        price: 120000
     }
 ];
 let listCards  = [];
@@ -57,10 +57,11 @@ function initApp(){
         let newDiv = document.createElement('div');
         newDiv.classList.add('item');
         newDiv.innerHTML = `
-            <img src="/assets/img/${value.image}">
-            <div class="title">${value.name}</div>
-            <div class="price">${value.price.toLocaleString()}</div>
-            <button onclick="addToCard(${key})">Añadir al carrito</button>`;
+        <img src="/assets/img/${value.image}">
+        <div class="title">${value.name}</div>
+        <div class="price">$${value.price.toLocaleString('es-CO')}</div>
+        <button onclick="addToCard(${key})">Añadir al carrito</button>
+      `;
         list.appendChild(newDiv);
     })
 }
@@ -75,7 +76,7 @@ function addToCard(key){
 function reloadCard(){
     listCard.innerHTML = '';
     let count = 0;
-    let totalPrice = '';
+    let totalPrice = 0;
     listCards.forEach((value, key)=>{
         totalPrice = totalPrice + value.price;
         count = count + value.quantity;
@@ -84,7 +85,8 @@ function reloadCard(){
             newDiv.innerHTML = `
                 <div><img src="/assets/img/${value.image}"/></div>
                 <div>${value.name}</div>
-                <div>${value.price.toLocaleString()}</div>
+                <div>$${value.price.toLocaleString('es-CO')}</div>
+
                 <div>
                     <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
                     <div class="count">${value.quantity}</div>
@@ -93,7 +95,8 @@ function reloadCard(){
                 listCard.appendChild(newDiv);
         }
     })
-    total.innerText = totalPrice.toLocaleString();
+    total.innerText = `$${totalPrice.toLocaleString('es-CO')}`;
+
     quantity.innerText = count;
 }
 function changeQuantity(key, quantity){

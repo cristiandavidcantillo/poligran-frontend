@@ -4,25 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante</title>
+    <title>DelishOrder Menú</title>
     <link rel="stylesheet" href="/Page/Menu/style.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Tilt+Warp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Menú</h1>
+            <nav class="w-full bg-white shadow-md z-10 relative">
+                <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <img src="/assets/img/logo.png" alt="Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold text-gray-800">DelishOrder</span>
+                  </div>
+                  <div class="space-x-8 hidden md:flex justify-center flex-1 text-center items-center">
+                    <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                      <img src="/assets/img/Vector.png" alt="Inicio" class="h-5 w-5">
+                      <span>Inicio</span>
+                    </a>
+                    <a href="../admin/service.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                      <img src="/assets/img/dash.png" alt="Dashboard" class="h-5 w-5">
+                      <span>Dashboard</span>
+                    </a>
+                    <!-- <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                      <img src="/assets/img/usuarios.png" alt="Usuarios" class="h-5 w-5">
+                      <span>Usuarios</span>
+                    </a> -->
+                    <a href="./contact.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                      <img src="/assets/img/soporte.png" alt="Soporte" class="h-5 w-5">
+                      <span>Soporte</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a href="../Login/login.html">
+            
+                      <a class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                        Cerrar sesión
+                      </a>
+                    </a>
+                  </div>
+                </div>
+              </nav>
             <div class="header-actions">
                 <div class="shopping">
                     <img src="/assets/img/shopping.svg" style="width: 25px;">
                     <span class="quantity">0</span>
                 </div>
-                <button class="btn boton" onclick="goHome()">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </button>
             </div>
         </header>
 
@@ -39,6 +70,6 @@
     </div>
     </div>
 
-    <script src="/Page/Menu/app.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

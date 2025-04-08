@@ -19,7 +19,7 @@
     letter-spacing: 1px;
 }
 .list .item img{
-    width: 90%;
+    width: 100%;
     height: 430px;
     object-fit: cover;
 }
@@ -158,7 +158,6 @@ button {
     width: 35%;
     height: 40px;
     border-radius: 40px;
-    background-color: rgb(2 108 229);
     border: none;
     outline: none;
     cursor: pointer;
@@ -170,7 +169,7 @@ button {
     display: flex;
     justify-content: end;
     align-items: center;
-    margin-left: -82px;
+    margin-top: 20px
 }
 .shopping, .logout-button {
     margin-right: 25px;
