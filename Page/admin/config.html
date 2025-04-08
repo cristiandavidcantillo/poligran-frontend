@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚙️ Configuración - Admin</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .settings-card {
+      transition: all 0.3s ease;
+      border-left: 4px solid #6c757d;
+      background-color: white;
+      margin-bottom: 1rem;
+    }
+
+    .settings-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-title {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .settings-description {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="w-full bg-white shadow-md z-10 relative">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <img src="/assets/img/logo.png" alt="Logo" class="h-8 w-8">
+        <span class="text-xl font-bold text-gray-800">DelishOrder</span>
+      </div>
+      <div class="space-x-8 hidden md:flex justify-center flex-1 text-center items-center">
+        <a href="../admin/index.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/Vector.png" alt="Inicio" class="h-5 w-5">
+          <span>Inicio</span>
+        </a>
+        <a href="../admin/service.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/dash.png" alt="Dashboard" class="h-5 w-5">
+          <span>Dashboard</span>
+        </a>
+        <a href="./usuarios.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+          <img src="/assets/img/usuarios.png" alt="Usuarios" class="h-5 w-5">
+          <span>Usuarios</span>
+        </a>
+      </div>
+      <div>
+        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container py-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+      <h2 class="m-0"><i class="fas fa-cog me-2 text-primary"></i>Configuración del Sistema</h2>
+      <button class="btn btn-primary">Guardar Cambios</button>
+    </div>
+
+    <div class="settings-container">
+      <!-- Secciones de configuración -->
+      <div class="card settings-card p-4 mb-4">
+        <h5 class="mb-4 settings-title"><i class="fas fa-sliders-h me-2"></i>Configuración General</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Modo Oscuro</h6>
+                <p class="mb-0 settings-description">Activar tema oscuro en el panel</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Notificaciones Push</h6>
+                <p class="mb-0 settings-description">Recibir notificaciones en tiempo real</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card settings-card p-4 mb-4">
+        <h5 class="mb-4 settings-title"><i class="fas fa-shopping-bag me-2"></i>Configuración de Pedidos</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Tiempo máximo de preparación (minutos)</label>
+            <input type="number" class="form-control" value="30">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Radio de entrega (km)</label>
+            <input type="number" class="form-control" value="5">
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Auto-asignación de repartidores</h6>
+                <p class="mb-0 settings-description">Asignar pedidos automáticamente</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card settings-card p-4 mb-4">
+        <h5 class="mb-4 settings-title"><i class="fas fa-shield-alt me-2"></i>Configuración de Seguridad</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Autenticación de dos factores</h6>
+                <p class="mb-0 settings-description">Aumentar la seguridad de la cuenta</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Registro de actividad</h6>
+                <p class="mb-0 settings-description">Mantener historial de acciones</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card settings-card p-4">
+        <h5 class="mb-4 settings-title"><i class="fas fa-bell me-2"></i>Configuración de Notificaciones</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Notificaciones por email</h6>
+                <p class="mb-0 settings-description">Recibir resumen diario por correo</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h6 class="mb-1">Alertas de inventario bajo</h6>
+                <p class="mb-0 settings-description">Notificar cuando el stock es bajo</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Umbral de stock bajo (%)</label>
+            <input type="number" class="form-control" value="20">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.querySelector('.btn-primary').addEventListener('click', () => {
+      alert('Cambios guardados correctamente');
+    });
+  </script>
+</body>
+</html>
