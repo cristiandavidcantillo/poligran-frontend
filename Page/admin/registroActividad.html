@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Consultas - Panel de Administración</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .message-card {
+            border-left: 4px solid #0d6efd;
+            transition: transform 0.2s;
+        }
+        .message-card:hover {
+            transform: translateX(5px);
+        }
+        .unread {
+            background-color: #f0f7ff;
+            border-left-color: #0d6efd;
+        }
+        .urgent {
+            border-left-color: #dc3545;
+        }
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+        .message-counter {
+            font-size: 0.8rem;
+            background-color: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="w-full bg-white shadow-md z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="/assets/img/logo.png" alt="Logo" class="h-8 w-8">
+                <span class="text-xl font-bold text-gray-800">DelishOrder</span>
+            </div>
+            <div class="space-x-8 hidden md:flex justify-center flex-1 text-center items-center">
+                <a href="./index.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                    <img src="/assets/img/Vector.png" alt="Inicio" class="h-5 w-5">
+                    <span>Inicio</span>
+                </a>
+                <a href="./service.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                    <img src="/assets/img/dash.png" alt="Dashboard" class="h-5 w-5">
+                    <span>Dashboard</span>
+                </a>
+                <a href="./usuarios.html" class="flex items-center space-x-2 text-black hover:text-blue-600 font-medium">
+                    <img src="/assets/img/usuarios.png" alt="Usuarios" class="h-5 w-5">
+                    <span>Usuarios</span>
+                </a>
+            </div>
+            <div>
+                <a href="../../index.html">
+                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                        Cerrar sesión
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Módulo de Consultas -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar p-4">
+                    <h5><i class="bi bi-funnel"></i> Filtros</h5>
+                    <div class="list-group mt-3">
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active">
+                            Todas las consultas
+                            <span class="message-counter bg-light text-dark">24</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            No leídos
+                            <span class="message-counter">8</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Urgentes
+                            <span class="message-counter">3</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Respondidos
+                            <span class="message-counter">13</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>Fecha</h6>
+                        <select class="form-select mb-3">
+                            <option>Últimos 7 días</option>
+                            <option>Último mes</option>
+                            <option>Último trimestre</option>
+                            <option>Personalizado</option>
+                        </select>
+
+                        <h6>Categoría</h6>
+                        <select class="form-select mb-3">
+                            <option>Todas</option>
+                            <option>Soporte técnico</option>
+                            <option>Facturación</option>
+                            <option>Información general</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3>Consultas y Mensajes</h3>
+                    <div class="d-flex gap-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar consultas...">
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" onclick="marcarTodoLeido()">
+                            <i class="bi bi-check-all"></i> Marcar todo como leído
+                        </button>
+                    </div>
+                </div>
+
+                <div id="listaMensajes"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mensajeModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle de la Consulta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="detallesMensaje"></div>
+                    <hr>
+                    <form id="formRespuesta">
+                        <div class="mb-3">
+                            <label class="form-label">Tu respuesta</label>
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="enviarRespuesta()">Enviar respuesta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const mensajes = [
+            {
+                id: 1,
+                remitente: "Juan Pérez",
+                email: "juan.perez@email.com",
+                asunto: "Problema con el pedido #12345",
+                mensaje: "No he recibido confirmación de mi pedido realizado hace 2 días...",
+                fecha: "2024-03-24 10:30",
+                categoria: "Soporte técnico",
+                leido: false,
+                urgente: true
+            },
+            {
+                id: 2,
+                remitente: "María González",
+                email: "maria.g@email.com",
+                asunto: "Consulta sobre facturación",
+                mensaje: "Necesito una copia de mi última factura...",
+                fecha: "2024-03-23 15:45",
+                categoria: "Facturación",
+                leido: true,
+                urgente: false
+            }
+        ];
+
+        function cargarMensajes() {
+            const contenedor = document.getElementById('listaMensajes');
+            contenedor.innerHTML = '';
+
+            mensajes.forEach(mensaje => {
+                const card = document.createElement('div');
+                card.className = `card message-card mb-3 ${!mensaje.leido ? 'unread' : ''} ${mensaje.urgente ? 'urgent' : ''}`;
+                card.innerHTML = `
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title">${mensaje.asunto}</h5>
+                            <span class="badge ${mensaje.urgente ? 'bg-danger' : 'bg-primary'}">${mensaje.urgente ? 'Urgente' : 'Normal'}</span>
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-muted">De: ${mensaje.remitente} <${mensaje.email}></h6>
+                        <p class="card-text">${mensaje.mensaje.substring(0, 100)}...</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">${mensaje.fecha}</small>
+                            <button class="btn btn-sm btn-outline-primary" onclick="verMensaje(${mensaje.id})">Ver detalle</button>
+                        </div>
+                    </div>
+                `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        function verMensaje(id) {
+            const mensaje = mensajes.find(m => m.id === id);
+            if (!mensaje) return;
+
+            const detalleDiv = document.getElementById('detallesMensaje');
+            detalleDiv.innerHTML = `
+                <div class="mb-3">
+                    <strong>De:</strong> ${mensaje.remitente} (${mensaje.email})<br>
+                    <strong>Fecha:</strong> ${mensaje.fecha}<br>
+                    <strong>Categoría:</strong> ${mensaje.categoria}
+                </div>
+                <h5>${mensaje.asunto}</h5>
+                <p>${mensaje.mensaje}</p>
+            `;
+
+            mensaje.leido = true;
+            new bootstrap.Modal(document.getElementById('mensajeModal')).show();
+            cargarMensajes();
+        }
+
+        function marcarTodoLeido() {
+            mensajes.forEach(mensaje => mensaje.leido = true);
+            cargarMensajes();
+        }
+
+        function enviarRespuesta() {
+            const respuesta = document.querySelector('#formRespuesta textarea').value;
+            if (!respuesta.trim()) {
+                alert('Por favor, escribe una respuesta');
+                return;
+            }
+            alert('Respuesta enviada con éxito');
+            bootstrap.Modal.getInstance(document.getElementById('mensajeModal')).hide();
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarMensajes);
+    </script>
+</body>
+</html>
